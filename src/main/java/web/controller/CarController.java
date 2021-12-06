@@ -13,14 +13,13 @@ import java.util.List;
 @Controller
 public class CarController {
 
+    CarServiceImpl carService = new CarServiceImpl();
+
     @GetMapping("/cars")
     public String CarsTable(@RequestParam(value = "count", defaultValue = "99") int count,
                             Model model) {
 
-        CarServiceImpl carService = new CarServiceImpl();
-        CarDaoImpl carDao = new CarDaoImpl();
-
-        List<Car> resultList = carService.getCars(carDao.getCars(), count);
+        List<Car> resultList = carService.getCars(count);
         model.addAttribute("count", resultList);
         return "cars";
     }
